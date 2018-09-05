@@ -88,3 +88,23 @@ var app = {
     item: null
   }
 }
+
+function catalogItem(card) {
+  var $items = document.createElement('div')
+  var $name = document.createElement('h4')
+  $name.textContent = card.name
+  var $brand = document.createElement('h5')
+  $brand.textContent = card.brand
+  var $price = document.createElement('h6')
+  $price.textContent = card.price
+  var $img = document.createElement('img')
+  $img.setAttribute('src', card.imageUrl)
+  $items.appendChild($name)
+  $items.appendChild($brand)
+  $items.appendChild($img)
+  $items.appendChild($price)
+  return $items
+}
+
+var $catalog = catalogItem(app.catalog.items[0])
+document.body.appendChild($catalog)
