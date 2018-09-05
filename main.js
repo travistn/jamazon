@@ -20,7 +20,7 @@ var app = {
         description: 'A hand drum for people who like belly dancing.',
         details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         origin: 'Turkey',
-        imageUrl: 'https://goo.gl/Q7X6VB'
+        imageUrl: 'https://media.mydukkan.com/image/33096/thmb_900x900_Vatan.Vatan21433096.jpg'
       },
       {
         itemId: 3,
@@ -92,12 +92,16 @@ var app = {
 function catalogItem(card) {
   var $items = document.createElement('div')
   var $name = document.createElement('h4')
+  $name.classList.add('h4')
   $name.textContent = card.name
   var $brand = document.createElement('h5')
+  $brand.classList.add('h5')
   $brand.textContent = card.brand
   var $price = document.createElement('h6')
+  $price.classList.add('h5')
   $price.textContent = card.price
   var $img = document.createElement('img')
+  $img.classList.add('img')
   $img.setAttribute('src', card.imageUrl)
   $items.appendChild($name)
   $items.appendChild($brand)
@@ -106,5 +110,25 @@ function catalogItem(card) {
   return $items
 }
 
-var $catalog = catalogItem(app.catalog.items[0])
+function allCatalogItems(cards) {
+  var $container = document.createElement('div')
+  $container.classList.add('container')
+  var $row = document.createElement('div')
+  $row.classList.add('row')
+  var $heading = document.createElement('h3')
+  $heading.classList.add('h3')
+  $heading.textContent = 'Instrument Selections'
+  $container.appendChild($heading)
+  $container.appendChild($row)
+  for (var i = 0; i < cards.length; i++) {
+    var $col = document.createElement('div')
+    $col.classList.add('col-md-4')
+    var $cards = catalogItem(cards[i])
+    $col.appendChild($cards)
+    $row.appendChild($col)
+  }
+  return $container
+}
+
+var $catalog = allCatalogItems(app.catalog.items)
 document.body.appendChild($catalog)
