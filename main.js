@@ -91,18 +91,18 @@ var app = {
 
 function catalogItem(item) {
   var $items = document.createElement('div')
-  $items.classList.add('itemsDiv')
+  $items.classList.add('items-div')
   var $name = document.createElement('h4')
-  $name.classList.add('card-header')
+  $name.classList.add('item-card-header')
   $name.textContent = item.name
   var $brand = document.createElement('span')
-  $brand.classList.add('card-subtitle')
+  $brand.classList.add('item-card-subtitle')
   $brand.textContent = item.brand
   var $price = document.createElement('span')
   $price.classList.add('price')
   $price.textContent = '$' + item.price
   var $img = document.createElement('img')
-  $img.classList.add('card-img')
+  $img.classList.add('item-card-img')
   $img.setAttribute('src', item.imageUrl)
   $items.appendChild($name)
   $items.appendChild($img)
