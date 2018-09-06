@@ -89,20 +89,20 @@ var app = {
   }
 }
 
-function catalogItem(card) {
+function catalogItem(item) {
   var $items = document.createElement('div')
   var $name = document.createElement('h4')
   $name.classList.add('h4')
-  $name.textContent = card.name
+  $name.textContent = item.name
   var $brand = document.createElement('h5')
   $brand.classList.add('h5')
-  $brand.textContent = card.brand
+  $brand.textContent = item.brand
   var $price = document.createElement('h6')
   $price.classList.add('h5')
-  $price.textContent = card.price
+  $price.textContent = item.price
   var $img = document.createElement('img')
   $img.classList.add('img')
-  $img.setAttribute('src', card.imageUrl)
+  $img.setAttribute('src', item.imageUrl)
   $items.appendChild($name)
   $items.appendChild($brand)
   $items.appendChild($img)
@@ -110,25 +110,38 @@ function catalogItem(card) {
   return $items
 }
 
-function allCatalogItems(cards) {
+function allCatalogItems(items) {
   var $container = document.createElement('div')
   $container.classList.add('container')
   var $row = document.createElement('div')
   $row.classList.add('row')
   var $heading = document.createElement('h3')
   $heading.classList.add('h3')
-  $heading.textContent = 'Instrument Selections'
+  $heading.textContent = 'List of Drums'
   $container.appendChild($heading)
   $container.appendChild($row)
-  for (var i = 0; i < cards.length; i++) {
+  for (var i = 0; i < items.length; i++) {
     var $col = document.createElement('div')
     $col.classList.add('col-md-4')
-    var $cards = catalogItem(cards[i])
+    var $cards = catalogItem(items[i])
     $col.appendChild($cards)
     $row.appendChild($col)
   }
   return $container
 }
 
-var $catalog = allCatalogItems(app.catalog.items)
-document.body.appendChild($catalog)
+allCatalogItems(app.catalog.items)
+
+function renderApp(state) {
+  var $view = document.querySelector('[data-view=catalog]')
+  if (state.view === 'catalog') {
+    $view.innerHTML = ''
+    $view.appendChild(allCatalogItems(state.catalog.items))
+  }
+  if (state.view === 'items') {
+    $view.innerHTML = ''
+    $view.appendChild(catalogItem(state.details.item))
+  }
+}
+
+renderApp(app)
