@@ -91,21 +91,22 @@ var app = {
 
 function catalogItem(item) {
   var $items = document.createElement('div')
+  $items.classList.add('itemsDiv')
   var $name = document.createElement('h4')
-  $name.classList.add('h4')
+  $name.classList.add('card-header')
   $name.textContent = item.name
-  var $brand = document.createElement('h5')
-  $brand.classList.add('h5')
+  var $brand = document.createElement('span')
+  $brand.classList.add('card-subtitle')
   $brand.textContent = item.brand
-  var $price = document.createElement('h6')
-  $price.classList.add('h5')
-  $price.textContent = item.price
+  var $price = document.createElement('span')
+  $price.classList.add('price')
+  $price.textContent = '$' + item.price
   var $img = document.createElement('img')
-  $img.classList.add('img')
+  $img.classList.add('card-img')
   $img.setAttribute('src', item.imageUrl)
   $items.appendChild($name)
-  $items.appendChild($brand)
   $items.appendChild($img)
+  $items.appendChild($brand)
   $items.appendChild($price)
   return $items
 }
@@ -116,8 +117,8 @@ function allCatalogItems(items) {
   var $row = document.createElement('div')
   $row.classList.add('row')
   var $heading = document.createElement('h3')
-  $heading.classList.add('h3')
-  $heading.textContent = 'List of Drums'
+  $heading.classList.add('heading')
+  $heading.textContent = 'Jamazon'
   $container.appendChild($heading)
   $container.appendChild($row)
   for (var i = 0; i < items.length; i++) {

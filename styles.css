@@ -1,0 +1,75 @@
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+
+  .heading {
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    margin-top: 3rem;
+    font-size: 50px;
+    border: solid 0.2rem;
+    padding: 1rem;
+  }
+
+  .itemsDiv {
+    margin-top: 4rem;
+    border: 1px solid #4c3c1b;
+  }
+
+  .card-header {
+    font-family: 'Raleway', sans-serif;
+    background-color: white;
+    font-size: 1.2rem;
+  }
+
+  .card-img {
+    height: 22rem;
+  }
+
+  .card-img:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  .card-subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    position: relative;
+    left: 1rem;
+  }
+
+  .price {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5rem;
+    position: relative;
+    float: right;
+    right: 1rem;
+  }
+}
