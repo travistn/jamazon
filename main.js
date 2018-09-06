@@ -131,17 +131,11 @@ function allCatalogItems(items) {
   return $container
 }
 
-allCatalogItems(app.catalog.items)
-
 function renderApp(state) {
   var $view = document.querySelector('[data-view=catalog]')
   if (state.view === 'catalog') {
     $view.innerHTML = ''
     $view.appendChild(allCatalogItems(state.catalog.items))
-  }
-  if (state.view === 'items') {
-    $view.innerHTML = ''
-    $view.appendChild(catalogItem(state.details.item))
   }
 }
 
