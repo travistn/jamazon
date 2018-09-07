@@ -113,6 +113,7 @@ function catalogItem(item) {
 
 function allCatalogItems(items) {
   var $container = document.createElement('div')
+  $container.setAttribute('data-item-id', 'id')
   $container.classList.add('container')
   var $row = document.createElement('div')
   $row.classList.add('row')
