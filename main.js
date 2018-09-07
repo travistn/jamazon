@@ -90,18 +90,20 @@ var app = {
 }
 
 document
-  .querySelector('[data-view=catalog')
+  .querySelector('[data-view=catalog]')
   .addEventListener('click', function (event) {
-    var $thumbnail = event.target.closest(['data-item-id'])
+    var $thumbnail = event.target.closest('[data-item-id]')
     if (!$thumbnail) return
     var number = ($thumbnail.getAttribute('data-item-id'))
+    console.log(typeof number)
     var item = getItemId(app.catalog.items, number)
-    app.details = item
     app.view = 'details'
+    app.details.item = item
   })
 
 function catalogItem(item) {
   var $items = document.createElement('div')
+  $items.setAttribute('data-item-id', item.itemId)
   $items.setAttribute('class', 'items-div d-flex flex-wrap mt-5 p-2 pr-3 pl-3 border')
   var $name = document.createElement('h4')
   $name.setAttribute('class', 'item-card-header card-header align-self-start')
@@ -124,7 +126,6 @@ function catalogItem(item) {
 
 function allCatalogItems(items) {
   var $container = document.createElement('div')
-  $container.setAttribute('data-item-id', 'id')
   $container.classList.add('container')
   var $row = document.createElement('div')
   $row.classList.add('row')
