@@ -99,7 +99,6 @@ document
     var item = findItem(app.catalog.items, number)
     app.view = 'details'
     app.details.item = item
-    renderApp(app)
   })
 
 function catalogItem(item) {
@@ -146,10 +145,14 @@ function allCatalogItems(items) {
 }
 
 function renderApp(state) {
-  var $view = document.querySelector('[data-view=catalog]')
+  var $view = document.querySelector('[data-view=' + state.view + ']')
   if (state.view === 'catalog') {
     $view.innerHTML = ''
     $view.appendChild(allCatalogItems(state.catalog.items))
+  }
+  if (state.view === 'details') {
+    $view.innerHTML = ''
+    $view.appendChild(renderDetails(state.details))
   }
 }
 
