@@ -99,6 +99,7 @@ document
     var item = findItem(app.catalog.items, number)
     app.view = 'details'
     app.details.item = item
+    renderApp(app)
   })
 
 function catalogItem(item) {
@@ -145,15 +146,16 @@ function allCatalogItems(items) {
 }
 
 function renderApp(state) {
-  var $view = document.querySelector('[data-view=' + state.view + ']')
+  var $view = document.querySelector('[data-view="' + state.view + '"]')
   if (state.view === 'catalog') {
     $view.innerHTML = ''
     $view.appendChild(allCatalogItems(state.catalog.items))
   }
   if (state.view === 'details') {
     $view.innerHTML = ''
-    $view.appendChild(renderDetails(state.details))
+    $view.appendChild(renderDetails(state.details.item))
   }
+  showView(state.view)
 }
 
 renderApp(app)
@@ -210,8 +212,6 @@ function renderDetails(item) {
   return $container
 }
 
-document.body.appendChild(renderDetails(app.catalog.items[2]))
-
 function findItem(items, id) {
   for (var i = 0; i < items.length; i++) {
     var itemId = items[i].itemId
@@ -222,7 +222,7 @@ function findItem(items, id) {
 }
 
 function showView(view) {
-  var $views = document.querySelectorAll('data-view')
+  var $views = document.querySelectorAll('[data-view]')
   for (var i = 0; i < $views.length; i++) {
     var $view = $views[i]
     if ($view.getAttribute('data-view') === view) {
@@ -233,5 +233,3 @@ function showView(view) {
     }
   }
 }
-
-showView()
