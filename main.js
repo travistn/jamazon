@@ -85,7 +85,10 @@ var app = {
     ]
   },
   details: {
-    items: null
+    item: null
+  },
+  cart: {
+    item: null
   }
 }
 
@@ -233,3 +236,21 @@ function showView(view) {
     }
   }
 }
+
+function addToCart(cart) {
+  var $cart = document.createElement('div')
+  $cart.setAttribute('class', 'list-group')
+  var $itemCount = document.createElement('p')
+  $itemCount.setAttribute('class', 'list-group-item')
+  for (var i in cart) {
+    if (app.catalog.items[i].id) {
+      cart.push($itemCount)
+      var $item = document.createElement('div')
+      $itemCount.appendChild($item)
+      $cart.appendChild($itemCount)
+    }
+  }
+  return $cart
+}
+
+addToCart(app.cart)
