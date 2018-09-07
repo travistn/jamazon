@@ -142,21 +142,55 @@ function renderApp(state) {
 renderApp(app)
 
 function renderDetails(item) {
+  var $container = document.createElement('div')
+  $container.setAttribute('class', 'container my-4')
+  var $row = document.createElement('div')
+  $row.setAttribute('class', 'row')
+  var $card = document.createElement('div')
+  $card.setAttribute('class', 'card shadow-sm')
+  var $row2 = document.createElement('div')
+  $row2.setAttribute('class', 'row no-gutters')
+  var $imgDiv = document.createElement('div')
+  $imgDiv.setAttribute('class', 'col-lg-4')
+  var $img = document.createElement('img')
+  $img.setAttribute('src', item.imageUrl)
+  $img.setAttribute('class', 'img-responsive w-100')
   var $detailsCon = document.createElement('div')
-  $detailsCon.setAttribute('class', 'container')
-  var $origin = document.createElement('h4')
-  $origin.setAttribute('class', 'h4')
-  $origin.textContent = item.origin
+  $detailsCon.setAttribute('class', 'col')
+  var $cardBody = document.createElement('div')
+  $cardBody.setAttribute('class', 'card-body')
+  var $name = document.createElement('h4')
+  $name.setAttribute('class', 'h4')
+  $name.textContent = item.name
+  var $brand = document.createElement('span')
+  $brand.setAttribute('class', 'card-text ml-3 font-italic')
+  $brand.textContent = 'by ' + item.brand
+  var $origin = document.createElement('p')
+  $origin.setAttribute('class', 'card-text')
+  $origin.textContent = 'Origin: ' + item.origin
   var $description = document.createElement('p')
-  $description.setAttribute('class', 'p')
+  $description.setAttribute('class', 'card-text mt-3')
   $description.textContent = item.description
   var $details = document.createElement('p')
-  $details.setAttribute('class', 'p')
+  $details.setAttribute('class', 'card-text font-italic small')
   $details.textContent = item.details
-  $detailsCon.appendChild($origin)
-  $detailsCon.appendChild($description)
-  $detailsCon.appendChild($details)
-  return $detailsCon
+  var $price = document.createElement('p')
+  $price.setAttribute('class', 'card-subtitle text-primary font-weight-bold')
+  $price.textContent = '$' + item.price
+  $container.appendChild($row)
+  $row.appendChild($card)
+  $card.appendChild($row2)
+  $row2.appendChild($imgDiv)
+  $imgDiv.appendChild($img)
+  $row2.appendChild($detailsCon)
+  $detailsCon.appendChild($cardBody)
+  $cardBody.appendChild($name)
+  $cardBody.appendChild($brand)
+  $cardBody.appendChild($description)
+  $cardBody.appendChild($details)
+  $cardBody.appendChild($origin)
+  $cardBody.appendChild($price)
+  return $container
 }
 
-document.body.appendChild(renderDetails(app.catalog.items[0]))
+document.body.appendChild(renderDetails(app.catalog.items[1]))
