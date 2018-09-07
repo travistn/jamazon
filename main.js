@@ -169,7 +169,7 @@ function renderDetails(item) {
   $origin.setAttribute('class', 'card-text')
   $origin.textContent = 'Origin: ' + item.origin
   var $description = document.createElement('p')
-  $description.setAttribute('class', 'card-text mt-3')
+  $description.setAttribute('class', 'card-text mt-3 font-weight-bold')
   $description.textContent = item.description
   var $details = document.createElement('p')
   $details.setAttribute('class', 'card-text font-italic small')
@@ -193,4 +193,14 @@ function renderDetails(item) {
   return $container
 }
 
-document.body.appendChild(renderDetails(app.catalog.items[1]))
+document.body.appendChild(renderDetails(app.catalog.items[3]))
+
+function getItemId(item) {
+  for (var i = 0; i < item.length; i++) {
+    if (item.items.itemId) {
+      return item.items
+    }
+  }
+}
+
+getItemId(app.catalog)
