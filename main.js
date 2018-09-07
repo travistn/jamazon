@@ -91,18 +91,18 @@ var app = {
 
 function catalogItem(item) {
   var $items = document.createElement('div')
-  $items.classList.add('items-div')
+  $items.setAttribute('class', 'items-div d-flex flex-wrap mt-5 p-2 pr-3 pl-3 border')
   var $name = document.createElement('h4')
-  $name.classList.add('item-card-header')
+  $name.setAttribute('class', 'item-card-header card-header align-self-start')
   $name.textContent = item.name
   var $brand = document.createElement('span')
-  $brand.classList.add('item-card-subtitle')
+  $brand.setAttribute('class', 'item-card-subtitle card-subtitle align-self-end')
   $brand.textContent = item.brand
   var $price = document.createElement('span')
-  $price.classList.add('price')
+  $price.setAttribute('class', 'item-card-price align-self-end ml-auto')
   $price.textContent = '$' + item.price
   var $img = document.createElement('img')
-  $img.classList.add('item-card-img')
+  $img.setAttribute('class', 'item-card-img card-img align-self-center')
   $img.setAttribute('src', item.imageUrl)
   $items.appendChild($name)
   $items.appendChild($img)
@@ -117,7 +117,7 @@ function allCatalogItems(items) {
   var $row = document.createElement('div')
   $row.classList.add('row')
   var $heading = document.createElement('h3')
-  $heading.classList.add('heading')
+  $heading.setAttribute('class', 'heading text-center mt-5 p-3')
   $heading.textContent = 'Jamazon'
   $container.appendChild($heading)
   $container.appendChild($row)
