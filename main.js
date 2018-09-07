@@ -217,3 +217,18 @@ function findItem(items, id) {
     }
   }
 }
+
+function showView(view) {
+  var $views = document.querySelectorAll('data-view')
+  for (var i = 0; i < $views.length; i++) {
+    var $view = $views[i]
+    if ($view.getAttribute('data-view') === view) {
+      $view.classList.remove('hidden')
+    }
+    else {
+      $view.classList.add('hidden')
+    }
+  }
+}
+
+showView()
