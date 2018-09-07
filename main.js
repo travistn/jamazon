@@ -159,6 +159,10 @@ function renderApp(state) {
     $view.appendChild(renderDetails(state.details.item))
   }
   showView(state.view)
+  if (state === state.cart) {
+    $view.innerHTML = ''
+    $view.appendChild(addToCart(state.cart))
+  }
 }
 
 renderApp(app)
@@ -239,11 +243,11 @@ function showView(view) {
 
 function addToCart(cart) {
   var $cart = document.createElement('div')
-  $cart.setAttribute('class', 'container')
+  $cart.setAttribute('class', 'cart-con container')
   var $itemCount = document.createElement('p')
   $itemCount.setAttribute('class', 'card-body')
   $cart.appendChild($itemCount)
   return $cart
 }
 
-document.body.appendChild(addToCart(app.cart))
+addToCart(app.cart)
