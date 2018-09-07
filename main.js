@@ -89,6 +89,12 @@ var app = {
   }
 }
 
+document
+  .querySelector('[data-view=catalog')
+  .addEventListener('click', function (event) {
+
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('class', 'items-div d-flex flex-wrap mt-5 p-2 pr-3 pl-3 border')
@@ -198,7 +204,7 @@ document.body.appendChild(renderDetails(app.catalog.items[3]))
 
 function getItemId(item) {
   for (var i = 0; i < item.length; i++) {
-    if (item.items.itemId) {
+    if (item.items.itemId === item.items.itemId[i]) {
       return item.items
     }
   }
