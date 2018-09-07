@@ -92,7 +92,9 @@ var app = {
 document
   .querySelector('[data-view=catalog')
   .addEventListener('click', function (event) {
-
+    var $thumbnail = event.target.closest(['data-item-id'])
+    if (!$thumbnail) return
+    console.log($thumbnail.getAttribute('data-item-id'))
   })
 
 function catalogItem(item) {
