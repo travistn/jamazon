@@ -140,3 +140,23 @@ function renderApp(state) {
 }
 
 renderApp(app)
+
+function renderDetails(item) {
+  var $detailsCon = document.createElement('div')
+  $detailsCon.setAttribute('class', 'container')
+  var $origin = document.createElement('h4')
+  $origin.setAttribute('class', 'h4')
+  $origin.textContent = item.origin
+  var $description = document.createElement('p')
+  $description.setAttribute('class', 'p')
+  $description.textContent = item.description
+  var $details = document.createElement('p')
+  $details.setAttribute('class', 'p')
+  $details.textContent = item.details
+  $detailsCon.appendChild($origin)
+  $detailsCon.appendChild($description)
+  $detailsCon.appendChild($details)
+  return $detailsCon
+}
+
+document.body.appendChild(renderDetails(app.catalog.items[0]))
