@@ -95,10 +95,11 @@ document
     var $thumbnail = event.target.closest('[data-item-id]')
     if (!$thumbnail) return
     var number = ($thumbnail.getAttribute('data-item-id'))
-    console.log(typeof number)
-    var item = getItemId(app.catalog.items, number)
+    number = parseInt(number)
+    var item = findItem(app.catalog.items, number)
     app.view = 'details'
     app.details.item = item
+    renderApp(app)
   })
 
 function catalogItem(item) {
@@ -206,13 +207,13 @@ function renderDetails(item) {
   return $container
 }
 
-document.body.appendChild(renderDetails(app.catalog.items[3]))
+document.body.appendChild(renderDetails(app.catalog.items[2]))
 
-function getItemId(item, id) {
-  for (var i = 0; i < item.length; i++) {
-    var itemId = item[i]
-    if (itemId.id === id) {
-      return itemId
+function findItem(items, id) {
+  for (var i = 0; i < items.length; i++) {
+    var itemId = items[i].itemId
+    if (itemId === id) {
+      return items[i]
     }
   }
 }
