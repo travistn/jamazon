@@ -85,7 +85,7 @@ var app = {
     ]
   },
   details: {
-    item: null
+    items: null
   }
 }
 
