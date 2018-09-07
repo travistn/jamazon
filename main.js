@@ -94,7 +94,10 @@ document
   .addEventListener('click', function (event) {
     var $thumbnail = event.target.closest(['data-item-id'])
     if (!$thumbnail) return
-    console.log($thumbnail.getAttribute('data-item-id'))
+    var number = ($thumbnail.getAttribute('data-item-id'))
+    var item = getItemId(app.catalog.items, number)
+    app.details = item
+    app.view = 'details'
   })
 
 function catalogItem(item) {
@@ -204,12 +207,11 @@ function renderDetails(item) {
 
 document.body.appendChild(renderDetails(app.catalog.items[3]))
 
-function getItemId(item) {
+function getItemId(item, id) {
   for (var i = 0; i < item.length; i++) {
-    if (item.items.itemId === item.items.itemId[i]) {
-      return item.items
+    var itemId = item[i]
+    if (itemId.id === id) {
+      return itemId
     }
   }
 }
-
-getItemId(app.catalog)
