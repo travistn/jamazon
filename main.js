@@ -113,6 +113,15 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=details]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'back-btn') {
+      app.view = 'catalog'
+      renderApp(app)
+    }
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
@@ -213,6 +222,10 @@ function renderDetails(item) {
   $button.setAttribute('class', 'btn mt-2 btn-success')
   $button.setAttribute('id', 'add-btn')
   $button.textContent = 'Add to cart'
+  var $backButton = document.createElement('button')
+  $backButton.setAttribute('class', 'btn btn-secondary float-right mt-2 mr-2')
+  $backButton.setAttribute('id', 'back-btn')
+  $backButton.textContent = 'Back'
   $container.appendChild($row)
   $row.appendChild($card)
   $card.appendChild($row2)
@@ -227,6 +240,7 @@ function renderDetails(item) {
   $cardBody.appendChild($origin)
   $cardBody.appendChild($price)
   $cardBody.appendChild($button)
+  $cardBody.appendChild($backButton)
   return $container
 }
 
