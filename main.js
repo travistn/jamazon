@@ -113,6 +113,11 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=details]')
+  .addEventListener('click', function (event) {
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
