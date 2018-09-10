@@ -295,4 +295,27 @@ function renderCartItem(cart) {
   return $cartSum
 }
 
-renderCartItem(app.cart)
+function renderCartSummary(cart) {
+  var $container = document.createElement('div')
+  $container.setAttribute('class', 'container')
+  var $heading = document.createElement('h2')
+  $heading.setAttribute('class', 'h2 text-center mt-4')
+  var $count = document.createElement('p')
+  $count.setAttribute('class', 'float-right')
+  $count.textContent = 'Items'
+  var $total = document.createElement('p')
+  $total.setAttribute('class', 'float-right')
+  $total.textContent = 'Total: $'
+  $container.appendChild($heading)
+  for (var i = 0; i < cart.length; i++) {
+    var $row = document.createElement('row')
+    $row.setAttribute('class', 'row')
+    var cartItem = renderCartItem(cart[i])
+    $row.appendChild(cartItem)
+  }
+  $container.appendChild($count)
+  $container.appendChild($total)
+  return $container
+}
+
+renderCartSummary(app.cart)
