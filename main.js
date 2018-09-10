@@ -213,6 +213,9 @@ function renderDetails(item) {
   $button.setAttribute('class', 'btn mt-2 btn-success')
   $button.setAttribute('id', 'add-btn')
   $button.textContent = 'Add to cart'
+  var $backButton = document.createElement('button')
+  $backButton.setAttribute('class', 'btn btn-secondary float-right mt-2 mr-2')
+  $backButton.textContent = 'Back'
   $container.appendChild($row)
   $row.appendChild($card)
   $card.appendChild($row2)
@@ -227,6 +230,7 @@ function renderDetails(item) {
   $cardBody.appendChild($origin)
   $cardBody.appendChild($price)
   $cardBody.appendChild($button)
+  $cardBody.appendChild($backButton)
   return $container
 }
 
