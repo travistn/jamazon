@@ -86,7 +86,8 @@ var app = {
   },
   details: {
     item: null
-  }
+  },
+  cart: []
 }
 
 document
@@ -100,6 +101,16 @@ document
     app.view = 'details'
     app.details.item = item
     renderApp(app)
+  })
+
+document
+  .querySelector('[data-view=details]')
+  .addEventListener('click', function (event) {
+    var item = app.details.item
+    if (event.target.getAttribute('id') === 'add-btn') {
+      app.cart.push(item)
+      renderApp(app)
+    }
   })
 
 function catalogItem(item) {
@@ -153,7 +164,9 @@ function renderApp(state) {
   }
   if (state.view === 'details') {
     $view.innerHTML = ''
+    $view.appendChild(renderCartCount(state.cart))
     $view.appendChild(renderDetails(state.details.item))
+
   }
   showView(state.view)
 }
@@ -196,6 +209,10 @@ function renderDetails(item) {
   var $price = document.createElement('p')
   $price.setAttribute('class', 'card-subtitle text-primary font-weight-bold')
   $price.textContent = '$' + item.price
+  var $button = document.createElement('button')
+  $button.setAttribute('class', 'btn mt-2 btn-success')
+  $button.setAttribute('id', 'add-btn')
+  $button.textContent = 'Add to cart'
   $container.appendChild($row)
   $row.appendChild($card)
   $card.appendChild($row2)
@@ -209,6 +226,7 @@ function renderDetails(item) {
   $cardBody.appendChild($details)
   $cardBody.appendChild($origin)
   $cardBody.appendChild($price)
+  $cardBody.appendChild($button)
   return $container
 }
 
@@ -232,4 +250,11 @@ function showView(view) {
       $view.classList.add('hidden')
     }
   }
+}
+
+function renderCartCount(cart) {
+  var $cart = document.createElement('div')
+  $cart.setAttribute('class', 'float-right mr-5')
+  $cart.textContent = 'Cart' + '(' + cart.length + ')'
+  return $cart
 }
