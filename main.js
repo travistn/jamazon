@@ -88,7 +88,7 @@ var app = {
     item: null
   },
   cart: {
-    item: null
+    item: []
   }
 }
 
@@ -108,7 +108,10 @@ document
 document
   .querySelector('[data-view=details]')
   .addEventListener('click', function (event) {
-
+    var item = app.details.item
+    if (event.target.getAttribute('class') === 'add-btn') {
+      app.cart.push(item)
+    }
   })
 
 function catalogItem(item) {
@@ -163,12 +166,10 @@ function renderApp(state) {
   if (state.view === 'details') {
     $view.innerHTML = ''
     $view.appendChild(renderDetails(state.details.item))
+    $view.appendChild(addToCart(state.cart))
+
   }
   showView(state.view)
-  if (state === state.cart) {
-    $view.innerHTML = ''
-    $view.appendChild(addToCart(state.cart))
-  }
 }
 
 renderApp(app)
@@ -210,7 +211,7 @@ function renderDetails(item) {
   $price.setAttribute('class', 'card-subtitle text-primary font-weight-bold')
   $price.textContent = '$' + item.price
   var $button = document.createElement('button')
-  $button.setAttribute('class', 'btn mt-2 btn-success')
+  $button.setAttribute('class', 'btn mt-2 btn-success add-btn')
   $button.textContent = 'Add to cart'
   $container.appendChild($row)
   $row.appendChild($card)
@@ -253,11 +254,7 @@ function showView(view) {
 
 function addToCart(cart) {
   var $cart = document.createElement('div')
-  $cart.setAttribute('class', 'cart-con container')
-  var $itemCount = document.createElement('p')
-  $itemCount.setAttribute('class', 'card-body')
-  $cart.appendChild($itemCount)
+  $cart.setAttribute('class', 'float-right')
+  $cart.textContent = 'Cart' + '(' + cart.length + ')'
   return $cart
 }
-
-addToCart(app.cart)
