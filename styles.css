@@ -34,3 +34,8 @@
 .hidden {
   display: none;
 }
+
+.cart-header {
+  font-family: 'Oswald', sans-serif;
+  font-size: 60px;
+}
