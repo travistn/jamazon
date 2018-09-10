@@ -272,3 +272,27 @@ function renderCartCount(cart) {
   $cart.textContent = 'Cart' + '(' + cart.length + ')'
   return $cart
 }
+
+function renderCartItem(cart) {
+  var $cartSum = document.createElement('div')
+  $cartSum.setAttribute('class', 'card-body')
+  var $name = document.createElement('h4')
+  $name.setAttribute('class', 'card-header')
+  $name.textContent = cart.name
+  var $brand = document.createElement('h5')
+  $brand.setAttribute('class', 'card-title')
+  $brand.textContent = cart.brand
+  var $price = document.createElement('span')
+  $price.setAttribute('class', 'card-subtitle float-right')
+  $price.textContent = cart.price
+  var $img = document.createElement('div')
+  $img.setAttribute('src', cart.imageUrl)
+  $img.setAttribute('class', 'card-img')
+  $cartSum.appendChild($name)
+  $cartSum.appendChild($brand)
+  $cartSum.appendChild($price)
+  $cartSum.appendChild($img)
+  return $cartSum
+}
+
+renderCartItem(app.cart)
