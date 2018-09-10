@@ -164,7 +164,7 @@ function renderApp(state) {
   }
   if (state.view === 'details') {
     $view.innerHTML = ''
-    $view.appendChild(addToCart(state.cart))
+    $view.appendChild(renderCartCount(state.cart))
     $view.appendChild(renderDetails(state.details.item))
 
   }
@@ -252,7 +252,7 @@ function showView(view) {
   }
 }
 
-function addToCart(cart) {
+function renderCartCount(cart) {
   var $cart = document.createElement('div')
   $cart.setAttribute('class', 'float-right mr-5')
   $cart.textContent = 'Cart' + '(' + cart.length + ')'
