@@ -87,9 +87,7 @@ var app = {
   details: {
     item: null
   },
-  cart: {
-    item: []
-  }
+  cart: []
 }
 
 document
@@ -109,7 +107,7 @@ document
   .querySelector('[data-view=details]')
   .addEventListener('click', function (event) {
     var item = app.details.item
-    if (event.target.getAttribute('class') === 'add-btn') {
+    if (event.target.getAttribute('id') === 'add-btn') {
       app.cart.push(item)
     }
   })
@@ -165,14 +163,16 @@ function renderApp(state) {
   }
   if (state.view === 'details') {
     $view.innerHTML = ''
-    $view.appendChild(renderDetails(state.details.item))
     $view.appendChild(addToCart(state.cart))
+    $view.appendChild(renderDetails(state.details.item))
 
   }
   showView(state.view)
 }
 
 renderApp(app)
+
+console.log(app)
 
 function renderDetails(item) {
   var $container = document.createElement('div')
@@ -211,7 +211,8 @@ function renderDetails(item) {
   $price.setAttribute('class', 'card-subtitle text-primary font-weight-bold')
   $price.textContent = '$' + item.price
   var $button = document.createElement('button')
-  $button.setAttribute('class', 'btn mt-2 btn-success add-btn')
+  $button.setAttribute('class', 'btn mt-2 btn-success')
+  $button.setAttribute('id', 'add-btn')
   $button.textContent = 'Add to cart'
   $container.appendChild($row)
   $row.appendChild($card)
@@ -254,7 +255,7 @@ function showView(view) {
 
 function addToCart(cart) {
   var $cart = document.createElement('div')
-  $cart.setAttribute('class', 'float-right')
+  $cart.setAttribute('class', 'float-right mr-5')
   $cart.textContent = 'Cart' + '(' + cart.length + ')'
   return $cart
 }
