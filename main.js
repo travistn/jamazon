@@ -116,6 +116,9 @@ document
 document
   .querySelector('[data-view=details]')
   .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'back-btn') {
+      app.view = 'catalog'
+    }
   })
 
 function catalogItem(item) {
@@ -220,6 +223,7 @@ function renderDetails(item) {
   $button.textContent = 'Add to cart'
   var $backButton = document.createElement('button')
   $backButton.setAttribute('class', 'btn btn-secondary float-right mt-2 mr-2')
+  $backButton.setAttribute('id', 'back-btn')
   $backButton.textContent = 'Back'
   $container.appendChild($row)
   $row.appendChild($card)
