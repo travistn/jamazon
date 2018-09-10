@@ -131,6 +131,15 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=cart]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'shop-btn') {
+      app.view = 'catalog'
+      renderApp(app)
+    }
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
@@ -333,7 +342,7 @@ function renderCartSummary(cart) {
   $container.setAttribute('class', 'container')
   var $heading = document.createElement('h2')
   $heading.setAttribute('class', 'cart-header text-center mt-4 font-weight-bold')
-  $heading.textContent = 'Cart'
+  $heading.textContent = '🛍️ Cart'
   var $count = document.createElement('div')
   var $total = document.createElement('div')
   var total = 0
@@ -350,5 +359,10 @@ function renderCartSummary(cart) {
     $container.appendChild($count)
     $container.appendChild($total)
   }
+  var $button = document.createElement('button')
+  $button.setAttribute('class', 'btn btn-primary float-right mb-5 mr-5')
+  $button.setAttribute('id', 'shop-btn')
+  $button.textContent = 'Continue Shopping'
+  $container.appendChild($button)
   return $container
 }
