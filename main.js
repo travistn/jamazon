@@ -109,6 +109,7 @@ document
     var item = app.details.item
     if (event.target.getAttribute('id') === 'add-btn') {
       app.cart.push(item)
+      renderApp(app)
     }
   })
 
@@ -171,8 +172,6 @@ function renderApp(state) {
 }
 
 renderApp(app)
-
-console.log(app)
 
 function renderDetails(item) {
   var $container = document.createElement('div')
