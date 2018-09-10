@@ -118,6 +118,7 @@ document
   .addEventListener('click', function (event) {
     if (event.target.getAttribute('id') === 'back-btn') {
       app.view = 'catalog'
+      renderApp(app)
     }
   })
 
