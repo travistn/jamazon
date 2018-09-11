@@ -122,6 +122,24 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=details]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'cart-count') {
+      app.view = 'cart'
+      renderApp(app)
+    }
+  })
+
+document
+  .querySelector('[data-view=cart]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'shop-btn') {
+      app.view = 'catalog'
+      renderApp(app)
+    }
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
@@ -169,13 +187,18 @@ function renderApp(state) {
   var $view = document.querySelector('[data-view="' + state.view + '"]')
   if (state.view === 'catalog') {
     $view.innerHTML = ''
+    $view.appendChild(renderCartCount(state.cart))
     $view.appendChild(allCatalogItems(state.catalog.items))
   }
   if (state.view === 'details') {
     $view.innerHTML = ''
     $view.appendChild(renderCartCount(state.cart))
     $view.appendChild(renderDetails(state.details.item))
-
+  }
+  if (state.view === 'cart') {
+    $view.innerHTML = ''
+    $view.appendChild(renderCartCount(state.cart))
+    $view.appendChild(renderCartSummary(state.cart))
   }
   showView(state.view)
 }
@@ -267,8 +290,72 @@ function showView(view) {
 }
 
 function renderCartCount(cart) {
-  var $cart = document.createElement('div')
-  $cart.setAttribute('class', 'float-right mr-5')
+  var $cart = document.createElement('a')
+  $cart.setAttribute('class', 'float-right mr-5 btn')
+  $cart.setAttribute('id', 'cart-count')
   $cart.textContent = 'Cart' + '(' + cart.length + ')'
   return $cart
+}
+
+function renderCartItem(cart) {
+  var $card = document.createElement('div')
+  $card.setAttribute('class', 'card shadow-m w-50 mx-auto')
+  var $row = document.createElement('div')
+  $row.setAttribute('class', 'row no-gutters')
+  var $imgDiv = document.createElement('div')
+  $imgDiv.setAttribute('class', 'col-lg-4 align-self-center')
+  var $img = document.createElement('img')
+  $img.setAttribute('src', cart.imageUrl)
+  $img.setAttribute('class', 'img-responsive w-75')
+  var $col = document.createElement('div')
+  $col.setAttribute('class', 'col')
+  var $cardBody = document.createElement('div')
+  $cardBody.setAttribute('class', 'card-body')
+  var $name = document.createElement('h4')
+  $name.setAttribute('class', 'h4')
+  $name.textContent = cart.name
+  var $brand = document.createElement('p')
+  $brand.setAttribute('class', 'card-text font-italic mt-3 mr-3')
+  $brand.textContent = 'By ' + cart.brand
+  var $price = document.createElement('p')
+  $price.setAttribute('class', 'card-text mt-5 mr-4')
+  $price.textContent = '$' + cart.price
+  $card.appendChild($row)
+  $row.appendChild($imgDiv)
+  $imgDiv.appendChild($img)
+  $row.appendChild($col)
+  $col.appendChild($cardBody)
+  $cardBody.appendChild($name)
+  $cardBody.appendChild($brand)
+  $cardBody.appendChild($price)
+  return $card
+}
+
+function renderCartSummary(cart) {
+  var $container = document.createElement('div')
+  $container.setAttribute('class', 'container text-center')
+  var $heading = document.createElement('h2')
+  $heading.setAttribute('class', 'cart-header mt-2')
+  $heading.textContent = '🛍️ Cart'
+  var $count = document.createElement('div')
+  $count.setAttribute('class', 'text-right mr-5')
+  var $total = document.createElement('div')
+  $total.setAttribute('class', 'text-right mr-5')
+  var total = 0
+  $container.appendChild($heading)
+  for (var i = 0; i < cart.length; i++) {
+    total += cart[i].price
+    $total.textContent = 'Total: $' + total
+    $count.textContent = cart.length + ' Item(s)'
+    var $cartItem = renderCartItem(cart[i])
+    $container.appendChild($cartItem)
+    $container.appendChild($count)
+    $container.appendChild($total)
+  }
+  var $button = document.createElement('button')
+  $button.setAttribute('class', 'btn btn-primary')
+  $button.setAttribute('id', 'shop-btn')
+  $button.textContent = 'Continue Shopping'
+  $container.appendChild($button)
+  return $container
 }
