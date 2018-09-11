@@ -357,5 +357,9 @@ function renderCartSummary(cart) {
   $button.setAttribute('id', 'shop-btn')
   $button.textContent = 'Continue Shopping'
   $container.appendChild($button)
+  var $checkout = document.createElement('button')
+  $checkout.setAttribute('class', 'btn btn-success ml-5')
+  $checkout.textContent = 'Check Out'
+  $container.appendChild($checkout)
   return $container
 }
