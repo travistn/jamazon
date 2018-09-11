@@ -140,6 +140,33 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=cart]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'check-out') {
+      app.view = 'checkout'
+      renderApp(app)
+    }
+  })
+
+document
+  .querySelector('[data-view=checkout]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'checkout-btn') {
+      app.view = 'confirmation'
+      renderApp(app)
+    }
+  })
+
+document
+  .querySelector('[data-view=confirmation')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'close-btn') {
+      app.view = 'catalog'
+      renderApp(app)
+    }
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
@@ -199,6 +226,14 @@ function renderApp(state) {
     $view.innerHTML = ''
     $view.appendChild(renderCartCount(state.cart))
     $view.appendChild(renderCartSummary(state.cart))
+  }
+  if (state.view === 'checkout') {
+    $view.innerHTML = ''
+    $view.appendChild(renderCheckout(state.cart))
+  }
+  if (state.view === 'confirmation') {
+    $view.innerHTML = ''
+    $view.appendChild(renderConfirmation())
   }
   showView(state.view)
 }
@@ -341,6 +376,7 @@ function renderCartSummary(cart) {
   $count.setAttribute('class', 'text-right mr-5')
   var $total = document.createElement('div')
   $total.setAttribute('class', 'text-right mr-5')
+  $total.setAttribute('id', 'cart-total')
   var total = 0
   $container.appendChild($heading)
   for (var i = 0; i < cart.length; i++) {
@@ -357,5 +393,100 @@ function renderCartSummary(cart) {
   $button.setAttribute('id', 'shop-btn')
   $button.textContent = 'Continue Shopping'
   $container.appendChild($button)
+  var $checkout = document.createElement('button')
+  $checkout.setAttribute('class', 'btn btn-success ml-5')
+  $checkout.setAttribute('id', 'check-out')
+  $checkout.textContent = 'Check Out'
+  $container.appendChild($checkout)
   return $container
+}
+
+function renderCheckout(cart) {
+  var $container = document.createElement('div')
+  $container.setAttribute('class', 'container')
+  var $heading = document.createElement('h1')
+  $heading.setAttribute('class', 'text-center mt-2')
+  $heading.textContent = 'Checkout'
+  var $form = document.createElement('div')
+  $form.setAttribute('class', 'form container shadow-sm w-50 p-5 mt-5 text-center')
+  var $form1 = document.createElement('div')
+  $form1.setAttribute('class', 'form-group')
+  var $name = document.createElement('input')
+  $name.setAttribute('class', 'form-control')
+  $name.setAttribute('type', 'text')
+  $name.setAttribute('placeholder', 'Name')
+  var $form2 = document.createElement('div')
+  $form2.setAttribute('class', 'form-group')
+  var $address = document.createElement('input')
+  $address.setAttribute('class', 'form-control')
+  $address.setAttribute('type', 'text')
+  $address.setAttribute('placeholder', 'Address')
+  var $form3 = document.createElement('div')
+  $form3.setAttribute('class', 'form-group')
+  var $credit = document.createElement('input')
+  $credit.setAttribute('class', 'form-control')
+  $credit.setAttribute('type', 'text')
+  $credit.textContent = 'Credit Card'
+  $credit.setAttribute('placeholder', 'Credit Card')
+  var $count = document.createElement('div')
+  $count.setAttribute('class', 'text-right')
+  $count.textContent = cart.length + ' Item(s)'
+  var $total = document.createElement('div')
+  $total.setAttribute('class', 'text-right')
+  var total = 0
+  for (var i = 0; i < cart.length; i++) {
+    total += cart[i].price
+    $total.textContent = 'Total: $' + total
+  }
+  var $button = document.createElement('button')
+  $button.setAttribute('class', 'btn btn-primary')
+  $button.setAttribute('id', 'checkout-btn')
+  $button.setAttribute('type', 'button')
+  $button.textContent = 'Pay Now'
+  $container.appendChild($heading)
+  $container.appendChild($form)
+  $form.appendChild($form1)
+  $form.appendChild($form2)
+  $form.appendChild($form3)
+  $form1.appendChild($name)
+  $form2.appendChild($address)
+  $form3.appendChild($credit)
+  $form.appendChild($count)
+  $form.appendChild($total)
+  $form.appendChild($button)
+  return $container
+}
+
+function renderConfirmation() {
+  var $div1 = document.createElement('div')
+  $div1.setAttribute('role', 'dialog')
+  $div1.setAttribute('class', 'text-center')
+  var $div2 = document.createElement('div')
+  $div2.setAttribute('class', 'modal-dialog')
+  $div2.setAttribute('role', 'document')
+  var $div3 = document.createElement('div')
+  $div3.setAttribute('class', 'modal-content')
+  var $div4 = document.createElement('div')
+  $div4.setAttribute('class', 'modal-header')
+  var $title = document.createElement('h5')
+  $title.setAttribute('class', 'modal-title')
+  $title.textContent = 'Order Confirmation'
+  var $body = document.createElement('div')
+  $body.setAttribute('class', 'modal-body')
+  $body.textContent = "Thank you! We'll let you know when your order is on the way!"
+  var $footer = document.createElement('div')
+  $footer.setAttribute('class', 'modal-footer')
+  var $button = document.createElement('button')
+  $button.setAttribute('type', 'button')
+  $button.setAttribute('class', 'btn btn-primary')
+  $button.setAttribute('id', 'close-btn')
+  $button.textContent = 'Close'
+  $div1.appendChild($div2)
+  $div2.appendChild($div3)
+  $div3.appendChild($div4)
+  $div4.appendChild($title)
+  $div3.appendChild($body)
+  $div3.appendChild($footer)
+  $footer.appendChild($button)
+  return $div1
 }
