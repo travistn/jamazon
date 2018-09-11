@@ -39,3 +39,16 @@
   font-family: 'Oswald', sans-serif;
   font-size: 60px;
 }
+
+.form {
+  border: solid 0.2rem;
+}
+
+.form::before {
+  content: 'Customer Info';
+  position: absolute;
+  background: white;
+  top: 14.5%;
+  left: 37%;
+  transform: translate(-50%, -50%);
+}

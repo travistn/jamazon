@@ -211,6 +211,7 @@ function renderApp(state) {
   }
   if (state.view === 'checkout') {
     $view.innerHTML = ''
+    $view.appendChild(renderCheckout(state.cart))
   }
   showView(state.view)
 }
@@ -353,6 +354,7 @@ function renderCartSummary(cart) {
   $count.setAttribute('class', 'text-right mr-5')
   var $total = document.createElement('div')
   $total.setAttribute('class', 'text-right mr-5')
+  $total.setAttribute('id', 'cart-total')
   var total = 0
   $container.appendChild($heading)
   for (var i = 0; i < cart.length; i++) {
@@ -374,5 +376,59 @@ function renderCartSummary(cart) {
   $checkout.setAttribute('id', 'check-out')
   $checkout.textContent = 'Check Out'
   $container.appendChild($checkout)
+  return $container
+}
+
+function renderCheckout(cart) {
+  var $container = document.createElement('div')
+  $container.setAttribute('class', 'container')
+  var $heading = document.createElement('h1')
+  $heading.setAttribute('class', 'text-center mt-2')
+  $heading.textContent = 'Checkout'
+  var $form = document.createElement('div')
+  $form.setAttribute('class', 'form container shadow-sm w-50 p-5 mt-5 text-center')
+  var $form1 = document.createElement('div')
+  $form1.setAttribute('class', 'form-group')
+  var $name = document.createElement('input')
+  $name.setAttribute('class', 'form-control')
+  $name.setAttribute('type', 'text')
+  $name.setAttribute('placeholder', 'Name')
+  var $form2 = document.createElement('div')
+  $form2.setAttribute('class', 'form-group')
+  var $address = document.createElement('input')
+  $address.setAttribute('class', 'form-control')
+  $address.setAttribute('type', 'text')
+  $address.setAttribute('placeholder', 'Address')
+  var $form3 = document.createElement('div')
+  $form3.setAttribute('class', 'form-group')
+  var $credit = document.createElement('input')
+  $credit.setAttribute('class', 'form-control')
+  $credit.setAttribute('type', 'text')
+  $credit.textContent = 'Credit Card'
+  $credit.setAttribute('placeholder', 'Credit Card')
+  var $count = document.createElement('div')
+  $count.setAttribute('class', 'text-right')
+  $count.textContent = cart.length + ' Item(s)'
+  var $total = document.createElement('div')
+  $total.setAttribute('class', 'text-right')
+  var total = 0
+  for (var i = 0; i < cart.length; i++) {
+    total += cart[i].price
+    $total.textContent = 'Total: $' + total
+  }
+  var $button = document.createElement('button')
+  $button.setAttribute('class', 'btn btn-primary')
+  $button.textContent = 'Pay Now'
+  $container.appendChild($heading)
+  $container.appendChild($form)
+  $form.appendChild($form1)
+  $form.appendChild($form2)
+  $form.appendChild($form3)
+  $form1.appendChild($name)
+  $form2.appendChild($address)
+  $form3.appendChild($credit)
+  $form.appendChild($count)
+  $form.appendChild($total)
+  $form.appendChild($button)
   return $container
 }
