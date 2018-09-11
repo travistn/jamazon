@@ -298,16 +298,12 @@ function renderCartCount(cart) {
 }
 
 function renderCartItem(cart) {
-  var $cartSum = document.createElement('div')
-  $cartSum.setAttribute('class', 'container my-4')
-  var $row = document.createElement('div')
-  $row.setAttribute('class', 'row')
   var $card = document.createElement('div')
-  $card.setAttribute('class', 'card shadow-sm w-50')
-  var $row2 = document.createElement('div')
-  $row2.setAttribute('class', 'row no-gutters')
+  $card.setAttribute('class', 'card shadow-m w-50 mx-auto')
+  var $row = document.createElement('div')
+  $row.setAttribute('class', 'row no-gutters')
   var $imgDiv = document.createElement('div')
-  $imgDiv.setAttribute('class', 'col-lg-4')
+  $imgDiv.setAttribute('class', 'col-lg-4 align-self-center')
   var $img = document.createElement('img')
   $img.setAttribute('src', cart.imageUrl)
   $img.setAttribute('class', 'img-responsive w-75')
@@ -319,48 +315,45 @@ function renderCartItem(cart) {
   $name.setAttribute('class', 'h4')
   $name.textContent = cart.name
   var $brand = document.createElement('p')
-  $brand.setAttribute('class', 'card-text font-italic ml-3 mt-1')
+  $brand.setAttribute('class', 'card-text font-italic mt-3 mr-3')
   $brand.textContent = 'By ' + cart.brand
   var $price = document.createElement('p')
-  $price.setAttribute('class', 'card-text mt-5')
+  $price.setAttribute('class', 'card-text mt-5 mr-4')
   $price.textContent = '$' + cart.price
-  $cartSum.appendChild($row)
-  $row.appendChild($card)
-  $card.appendChild($row2)
-  $row2.appendChild($imgDiv)
+  $card.appendChild($row)
+  $row.appendChild($imgDiv)
   $imgDiv.appendChild($img)
-  $row2.appendChild($col)
+  $row.appendChild($col)
   $col.appendChild($cardBody)
   $cardBody.appendChild($name)
   $cardBody.appendChild($brand)
   $cardBody.appendChild($price)
-  return $cartSum
+  return $card
 }
 
 function renderCartSummary(cart) {
   var $container = document.createElement('div')
-  $container.setAttribute('class', 'container')
+  $container.setAttribute('class', 'container text-center')
   var $heading = document.createElement('h2')
-  $heading.setAttribute('class', 'cart-header text-center mt-4 font-weight-bold')
+  $heading.setAttribute('class', 'cart-header mt-2')
   $heading.textContent = '🛍️ Cart'
   var $count = document.createElement('div')
+  $count.setAttribute('class', 'text-right mr-5')
   var $total = document.createElement('div')
+  $total.setAttribute('class', 'text-right mr-5')
   var total = 0
   $container.appendChild($heading)
   for (var i = 0; i < cart.length; i++) {
     total += cart[i].price
     $total.textContent = 'Total: $' + total
     $count.textContent = cart.length + ' Item(s)'
-    var $row = document.createElement('row')
-    $row.setAttribute('class', 'row')
     var $cartItem = renderCartItem(cart[i])
-    $row.appendChild($cartItem)
-    $container.appendChild($row)
+    $container.appendChild($cartItem)
     $container.appendChild($count)
     $container.appendChild($total)
   }
   var $button = document.createElement('button')
-  $button.setAttribute('class', 'btn btn-primary float-right mb-5 mr-5')
+  $button.setAttribute('class', 'btn btn-primary')
   $button.setAttribute('id', 'shop-btn')
   $button.textContent = 'Continue Shopping'
   $container.appendChild($button)
