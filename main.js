@@ -158,6 +158,15 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=confirmation')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'close-btn') {
+      app.view = 'catalog'
+      renderApp(app)
+    }
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
@@ -467,16 +476,17 @@ function renderConfirmation() {
   $body.textContent = "Thank you! We'll let you know when your order is on the way!"
   var $footer = document.createElement('div')
   $footer.setAttribute('class', 'modal-footer')
-  var $button1 = document.createElement('button')
-  $button1.setAttribute('type', 'button')
-  $button1.setAttribute('class', 'btn btn-primary')
-  $button1.textContent = 'Close'
+  var $button = document.createElement('button')
+  $button.setAttribute('type', 'button')
+  $button.setAttribute('class', 'btn btn-primary')
+  $button.setAttribute('id', 'close-btn')
+  $button.textContent = 'Close'
   $div1.appendChild($div2)
   $div2.appendChild($div3)
   $div3.appendChild($div4)
   $div4.appendChild($title)
   $div3.appendChild($body)
   $div3.appendChild($footer)
-  $footer.appendChild($button1)
+  $footer.appendChild($button)
   return $div1
 }
