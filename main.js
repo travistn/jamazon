@@ -149,6 +149,15 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=checkout]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'checkout-btn') {
+      app.view = 'confirmation'
+      renderApp(app)
+    }
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
@@ -212,6 +221,10 @@ function renderApp(state) {
   if (state.view === 'checkout') {
     $view.innerHTML = ''
     $view.appendChild(renderCheckout(state.cart))
+  }
+  if (state.view === 'confirmation') {
+    $view.innerHTML = ''
+    $view.appendChild(renderConfirmation())
   }
   showView(state.view)
 }
@@ -418,6 +431,8 @@ function renderCheckout(cart) {
   }
   var $button = document.createElement('button')
   $button.setAttribute('class', 'btn btn-primary')
+  $button.setAttribute('id', 'checkout-btn')
+  $button.setAttribute('type', 'button')
   $button.textContent = 'Pay Now'
   $container.appendChild($heading)
   $container.appendChild($form)
@@ -431,4 +446,37 @@ function renderCheckout(cart) {
   $form.appendChild($total)
   $form.appendChild($button)
   return $container
+}
+
+function renderConfirmation() {
+  var $div1 = document.createElement('div')
+  $div1.setAttribute('role', 'dialog')
+  $div1.setAttribute('class', 'text-center')
+  var $div2 = document.createElement('div')
+  $div2.setAttribute('class', 'modal-dialog')
+  $div2.setAttribute('role', 'document')
+  var $div3 = document.createElement('div')
+  $div3.setAttribute('class', 'modal-content')
+  var $div4 = document.createElement('div')
+  $div4.setAttribute('class', 'modal-header')
+  var $title = document.createElement('h5')
+  $title.setAttribute('class', 'modal-title')
+  $title.textContent = 'Order Confirmation'
+  var $body = document.createElement('div')
+  $body.setAttribute('class', 'modal-body')
+  $body.textContent = "Thank you! We'll let you know when your order is on the way!"
+  var $footer = document.createElement('div')
+  $footer.setAttribute('class', 'modal-footer')
+  var $button1 = document.createElement('button')
+  $button1.setAttribute('type', 'button')
+  $button1.setAttribute('class', 'btn btn-primary')
+  $button1.textContent = 'Close'
+  $div1.appendChild($div2)
+  $div2.appendChild($div3)
+  $div3.appendChild($div4)
+  $div4.appendChild($title)
+  $div3.appendChild($body)
+  $div3.appendChild($footer)
+  $footer.appendChild($button1)
+  return $div1
 }
