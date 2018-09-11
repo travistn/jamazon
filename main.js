@@ -145,6 +145,7 @@ document
   .addEventListener('click', function (event) {
     if (event.target.getAttribute('id') === 'check-out') {
       app.view = 'checkout'
+      renderApp(app)
     }
   })
 
@@ -207,6 +208,9 @@ function renderApp(state) {
     $view.innerHTML = ''
     $view.appendChild(renderCartCount(state.cart))
     $view.appendChild(renderCartSummary(state.cart))
+  }
+  if (state.view === 'checkout') {
+    $view.innerHTML = ''
   }
   showView(state.view)
 }
