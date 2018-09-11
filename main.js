@@ -140,6 +140,14 @@ document
     }
   })
 
+document
+  .querySelector('[data-view=cart]')
+  .addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'check-out') {
+      app.view = 'checkout'
+    }
+  })
+
 function catalogItem(item) {
   var $items = document.createElement('div')
   $items.setAttribute('data-item-id', item.itemId)
@@ -359,6 +367,7 @@ function renderCartSummary(cart) {
   $container.appendChild($button)
   var $checkout = document.createElement('button')
   $checkout.setAttribute('class', 'btn btn-success ml-5')
+  $checkout.setAttribute('id', 'check-out')
   $checkout.textContent = 'Check Out'
   $container.appendChild($checkout)
   return $container
